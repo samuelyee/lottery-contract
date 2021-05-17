@@ -1,6 +1,7 @@
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { abi, evm } = require('./compile');
+const util = require('util');
 // const { interface, bytecode } = require('../compile');
 
 const mnemonic = '';
@@ -14,7 +15,7 @@ const deploy = async () => {
     const accounts = await web3.eth.getAccounts();
 
     console.log('Attempting to deploy from account', accounts[0]);
-
+    console.log(util.inspect(abi, false, null, true /* enable colors */))
     const result = await new web3.eth.Contract(abi) 
         .deploy({ 
             data: evm.bytecode.object, 
